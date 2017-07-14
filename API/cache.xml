@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<cache>
+	<pool name="pool" subscription-enabled="false">
+		<locator host="172.31.45.62" port="10334" />
+	</pool>
+</cache>
