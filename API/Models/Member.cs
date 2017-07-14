@@ -1,86 +1,94 @@
 ﻿using System;
+
 namespace API.Models
 {
   public class Member
   {
-    public string firstName { get; set; }
-    public string lastName { get; set; }
-    public string email { get; set; }
-    public string password { get; set; }
+    public string fullName { get; set; }
+		public string email { get; set; }
 
-    public static void Add(GemStone.GemFire.Cache.Generic.IRegion<string, Member> region, Member member, bool exceptionOnExists = true){
+		public static Member Add(GemStone.GemFire.Cache.Generic.IRegion<string, string> region , Member member , bool exceptionOnExists = true){
       if(region == null || member == null){
         throw new ArgumentNullException();
       }
 
-      if(region.ContainsKey(member.email)){
-        if(exceptionOnExists){
-          throw new MemberAccessException();
-        }
+			try {
+				string tmp;
+				/*if (region.TryGetValue(member.email, out tmp)) {
+					if (exceptionOnExists) {
+						throw new MemberAccessException();
+					}
 
-        return;
-      }
+					return Get(region, member.email);
+				}*/
 
-      try{
-        region[member.email] = member;
-      }catch(Exception ex){
-        throw new AddMemberException("Error adding member",ex);
-      }
+				region[member.email] = member.fullName;
+			} catch (Exception ex) {
+				throw new AddMemberException("Error add member", ex);
+			}
 
-      return;
+      return Get(region, member.email);
     }
-    public static Member Get(GemStone.GemFire.Cache.Generic.IRegion<string, Member> region, string email){
+    public static Member Get(GemStone.GemFire.Cache.Generic.IRegion<string, string> region, string email){
       if(region == null || string.IsNullOrEmpty(email)){
         throw new ArgumentNullException();
       }
 
-      Member m = null;
+			string name = null;
+			
+			try {
+				if (!region.TryGetValue(email, out name))
+					throw new NullReferenceException("Key does not exist");
+			} catch (Exception ex) {
+				throw new GetMemberException("Error getting member", ex);
+			}
 
-      if(!region.ContainsKey(email)){
-        throw new NullReferenceException();
-      }
+			if(string.IsNullOrEmpty(name))
+				throw new NullReferenceException("Key does not exist");
 
-      try{
-        m = region[email];
-      }catch(Exception ex){
-        throw new GetMemberException("Error getting member", ex);
-      }
+			Member m = new Member() {
+				fullName = name,
+				email = email
+			};
 
       return m;
     }
-    public static void Remove(GemStone.GemFire.Cache.Generic.IRegion<string, Member> region, string email){
+    /*public static void Remove(GemStone.GemFire.Cache.Generic.IRegion<string, string> region, string email){
       if(region == null || string.IsNullOrEmpty(email)){
         throw new ArgumentNullException();
       }
 
-      if(!region.ContainsKey(email)){
-        throw new NullReferenceException();
-      }
+			try {
+				string tmp;
+				if (!region.TryGetValue(email, out tmp)) {
+					throw new NullReferenceException();
+				}
 
-      try{
-        region.Remove(email);
-      }catch(Exception ex){
-        throw new RemoveMemberException("Error removing member", ex);
-      }
+				region.Remove(email);
+			} catch (Exception ex) {
+				throw new RemoveMemberException("Error getting member", ex);
+			}
 
       return;
     }
-    public static void Update(GemStone.GemFire.Cache.Generic.IRegion<string, Member> region, string email, Member member){
+    public static void Update(GemStone.GemFire.Cache.Generic.IRegion<string, string> region, string email, Member member){
       if(region == null || string.IsNullOrEmpty(email) || member == null){
         throw new ArgumentNullException();
       }
 
-			if (!region.ContainsKey(email)){
-				throw new NullReferenceException();
+			try {
+				string tmp;
+				if (!region.TryGetValue(email, out tmp)) {
+					throw new NullReferenceException();
+				}
+
+				region[email] = member.fullName;
+			} catch (Exception ex) {
+				throw new RemoveMemberException("Error getting member", ex);
 			}
 
-      try{
-        region[email] = member;
-      }catch(Exception ex){
-        throw new UpdateMemberException("Error updating member", ex);
-      }
-
       return;
-    }
-  }
+    }*/
+
+		}
 }
