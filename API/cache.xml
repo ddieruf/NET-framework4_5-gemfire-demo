@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--http://gemfire82.docs.pivotal.io/docs-gemfire/gemfire_nativeclient/connection-pools/configuring-pools-attributes-example.html-->
 <cache>
-	<pool name="pool" subscription-enabled="false">
+	<pool name="pool" subscription-enabled="false" max-connections="-1" min-connections="20" statistic-interval="-1">
 		<locator host="172.31.45.62" port="10334" />
 	</pool>
 </cache>

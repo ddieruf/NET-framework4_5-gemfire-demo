@@ -44,7 +44,7 @@ namespace API.Controllers
 
 			return m;
     }
-    public void Remove(string email)
+   /* public void Remove(string email)
     {
       try{
         Models.Member.Remove(Global.region,email);
@@ -75,7 +75,7 @@ namespace API.Controllers
       }
 
       return;
-    }
+    }*/
 		
     private void ThrowJson(Exception ex){
       ThrowJson(ex.Message, ex.StackTrace);
@@ -100,7 +100,7 @@ namespace API.Controllers
     [OperationContract]
     [WebInvoke(Method = "POST", UriTemplate = "", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     Models.Member Add(Models.Member member);
-		
+		/*
 		[OperationContract]
 		[WebInvoke(Method = "DELETE", UriTemplate = "?email={email}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
 		void Remove(string email);
@@ -108,6 +108,6 @@ namespace API.Controllers
 		[OperationContract]
 		[WebInvoke(Method = "PUT", UriTemplate = "?email={email}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
 		void Update(string email, Models.Member member);
-		
+		*/
 	}
 }
