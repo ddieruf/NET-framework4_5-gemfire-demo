@@ -16,6 +16,12 @@ namespace API.Models
 			cacheProps.Insert("cache-xml-file", baseDir + @"\cache.xml");
 			cacheProps.Insert("log-level", "fine");
 			cacheProps.Insert("log-file", @"c:\Logs\client.log");
+			
+			cacheProps.Insert("security-client-auth-library", "ExampleUserAuth");
+			cacheProps.Insert("security-client-auth-factory", "GemStone.GemFire.Templates.Cache.Security.UserPasswordAuthInit.Create");
+			cacheProps.Insert("security-username", "root");
+			cacheProps.Insert("security-password", "root");
+			cacheProps.Insert("appdomain-enabled", "true");
 
 			GemStone.GemFire.Cache.Generic.CacheFactory cacheFactory = GemStone.GemFire.Cache.Generic.CacheFactory.CreateCacheFactory(cacheProps);
 

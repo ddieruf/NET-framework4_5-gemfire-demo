@@ -44,38 +44,6 @@ namespace API.Controllers
 
 			return m;
     }
-    public void Remove(string email)
-    {
-      try{
-        Models.Member.Remove(Global.region,email);
-      }catch (Models.RemoveMemberException ge){
-        ThrowJson("Error removing member, " + ge.InnerException.Message, ge.InnerException.StackTrace);
-      }catch (ArgumentNullException ar){
-        ThrowJson("Missing argument", ar.StackTrace);
-      }catch (NullReferenceException){
-        ThrowJson("Member email doesn't exist");
-      }catch (Exception ex){
-        ThrowJson(ex);
-      }
-
-      return;
-    }
-    public void Update(string email, Models.Member member)
-    {
-      try{
-        Models.Member.Update(Global.region, email, member);
-      }catch (Models.UpdateMemberException ge){
-        ThrowJson("Error updating member, " + ge.InnerException.Message, ge.InnerException.StackTrace);
-      }catch (ArgumentNullException ar){
-        ThrowJson("Missing argument", ar.StackTrace);
-      }catch (NullReferenceException){
-        ThrowJson("Member email doesn't exist");
-      }catch (Exception ex){
-        ThrowJson(ex);
-      }
-
-      return;
-    }
 		
     private void ThrowJson(Exception ex){
       ThrowJson(ex.Message, ex.StackTrace);
@@ -100,14 +68,5 @@ namespace API.Controllers
     [OperationContract]
     [WebInvoke(Method = "POST", UriTemplate = "", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
     Models.Member Add(Models.Member member);
-		
-		[OperationContract]
-		[WebInvoke(Method = "DELETE", UriTemplate = "?email={email}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-		void Remove(string email);
-
-		[OperationContract]
-		[WebInvoke(Method = "PUT", UriTemplate = "?email={email}", BodyStyle = WebMessageBodyStyle.Bare, ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-		void Update(string email, Models.Member member);
-		
 	}
 }

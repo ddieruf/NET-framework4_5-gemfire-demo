@@ -45,9 +45,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GemStone.GemFire.Cache, Version=9.0.6.17, Culture=neutral, PublicKeyToken=126e6338d9f55e0c, processorArchitecture=AMD64">
+    <Reference Include="GemStone.GemFire.Cache, Version=9.0.7.22, Culture=neutral, PublicKeyToken=126e6338d9f55e0c, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\pivotal-gemfire-nativeclient-64bit-9.0.6-build.17\bin\GemStone.GemFire.Cache.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\pivotal-gemfire-nativeclient-64bit-9.0.7-build.22\bin\GemStone.GemFire.Cache.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -98,6 +98,12 @@
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Region.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ExampleUserAuth\ExampleUserAuth.csproj">
+      <Project>{395d09ac-d6dc-474e-892b-9b4368ba33d5}</Project>
+      <Name>ExampleUserAuth</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
