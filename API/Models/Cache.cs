@@ -29,7 +29,9 @@ namespace API.Models
 			cacheProps.Insert("log-level", "fine");
 			cacheProps.Insert("log-file", @"c:\Logs\client.log");
 			cacheProps.Insert("ssl-enabled", "true");
-			cacheProps.Insert("ssl-truststore", baseDir + @"\certificatetruststore");
+			cacheProps.Insert("ssl-truststore", baseDir + @"\mutual-ssl\ca.cert.pem");
+			cacheProps.Insert("ssl-keystore", baseDir + @"\mutual-ssl\client.pem");
+			cacheProps.Insert("ssl-keystore-password", "secretpassword");
 			cacheProps.Insert("statistic-sampling-enabled", "false");
 			cacheProps.Insert("connect-timeout", "10");
 

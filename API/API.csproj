@@ -75,7 +75,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="certificatetruststore" />
+    <Content Include="mutual-ssl\ca.cert.pem" />
+    <Content Include="mutual-ssl\client.p12" />
+    <Content Include="mutual-ssl\client.pem" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
