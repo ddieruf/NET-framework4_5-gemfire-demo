@@ -12,6 +12,18 @@ namespace API.Models
 				throw new FileNotFoundException();
 			}
 
+			string pathToGemfireLib = @"C:\humana-gemfire-lib";
+			string currentPath = Environment.GetEnvironmentVariable("Path");
+
+			//C:\pivotal-gemfire-nativeclient-64bit-9.0.6-build.17\bin
+
+			//remove any existing path settings, so we are sure to use the above location
+			currentPath = currentPath.Replace(@"C:\pivotal-gemfire-nativeclient-64bit-9.0.6-build.17\bin", "")
+																.Replace(";;", ";");
+
+			string newPath = pathToGemfireLib + ";" + currentPath.Trim();//here trimming need to bedone
+			Environment.SetEnvironmentVariable("Path", newPath);
+
 			GemStone.GemFire.Cache.Generic.Properties<string,string> cacheProps = new GemStone.GemFire.Cache.Generic.Properties<string,string>();
 			cacheProps.Insert("cache-xml-file", baseDir + @"\cache.xml");
 			cacheProps.Insert("log-level", "fine");
