@@ -16,8 +16,6 @@ namespace API.Models
 			cacheProps.Insert("cache-xml-file", baseDir + @"\cache.xml");
 			cacheProps.Insert("log-level", "fine");
 			cacheProps.Insert("log-file", @"c:\Logs\client.log");
-			cacheProps.Insert("ssl-enabled", "true");
-			cacheProps.Insert("ssl-truststore", baseDir + @"\certificatetruststore");
 
 			GemStone.GemFire.Cache.Generic.CacheFactory cacheFactory = GemStone.GemFire.Cache.Generic.CacheFactory.CreateCacheFactory(cacheProps);
 
